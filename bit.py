@@ -5,15 +5,16 @@ from PIL import Image
 
 
 def main():
-	bit_size_x = 32
-	bit_size_y = 32
+	bit_size_x = 4
+	bit_size_y = 4
 	shape_x = 256
 	shape_y = 256
 
 	size_x = int(shape_x / bit_size_x)
 	size_y = int(shape_y / bit_size_y)
 
-	link = '/home/user/pictures/pine_apple.png'
+	link = '/abc/xyz.png'
+
 	try:
 		img = Image.open(link)
 		img = img.convert(mode='RGB')
@@ -35,7 +36,7 @@ def main():
 		for color in s:
 			r, g, b = color
 			my_color = '0x' + str(hex(int(r)))[2:] + str(hex(int(g)))[2:] + str(hex(int(b)))[2:]
-			x += ('li $t0, ' + my_color + '\nsw $t0, ' + str(t) + '($k0)\n nop\n')
+			x += ('li $t0, ' + my_color + '\nsw $t0, ' + str(t) + '($k0)\nnop\nnop\nnop\n')
 			t += 4
 		print(x.count('\n'))
 
